@@ -34,7 +34,8 @@ public class employeeClient {  // begin class
         String input[] = null;
         double wage = 0;
         int hours = 0;
-        
+        double pay = 0;
+        String output = "";
         
     	
     // create instances of objects for i/o and formatting
@@ -45,7 +46,7 @@ public class employeeClient {  // begin class
     	BufferedReader fin = new BufferedReader(new FileReader("employeeData.txt"));
     	PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("textOutA2.txt")));
         
-        ProgramInfo programInfo = new ProgramInfo("Assignment 2");
+        ProgramInfo programInfo = new ProgramInfo("A3: Employee Payroll");
         
     	
     // ********** Print output Banner **********
@@ -67,6 +68,11 @@ public class employeeClient {  // begin class
             wage = Double.parseDouble(input[1]);
             
             employee Employee = new employee(hours, wage);
+            
+            pay = Employee.pay();
+            
+            output = Employee.toString();
+            System.out.format(output + "\n");
             
             strin = fin.readLine();
         }

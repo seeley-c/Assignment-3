@@ -1,3 +1,6 @@
+
+import java.text.DecimalFormat;
+
 /* **********************************************************
  * Programmer:	C. Seeley
  * Class:       CS30S
@@ -27,30 +30,29 @@
             private int ID = 0;
             private double wage = 0;
             private int hours = 0;
+            private double pay = 0;
+            private double otPay = 0;
+            private double normHourPay = 0;
           
      
  	// ********** constructors ***********
             
-            private employee () {
+            public employee () {
                 ID = nextID++;
             }
             
-            private employee (int h, double w) {
+            public employee (int h, double w) {
                 ID = nextID++;
                 wage = w;
                 hours = h;
-                
-                System.out.println(ID + ", " + wage + ", " + hours);
             }
             
             
             
  	// ********** accessors **********
             
-            private double pay () {
+            public double pay () {
                 
-               double otPay;
-               double normHourPay;
                double grossPay; 
                int otHours = 0;
                 
@@ -59,12 +61,29 @@
                     otPay = otHours * (wage * OTPAYMODIFIER);
                     normHourPay = (hours-otHours) * wage;
                     grossPay = normHourPay + otPay;
+                    
                 }
                 else {
                     grossPay = hours * wage; 
+                    normHourPay = grossPay;
                 }
                 
+                pay = grossPay;
+                
                 return grossPay;
+            }
+            
+            public String toString(){
+                String data = "";
+                DecimalFormat df = new DecimalFormat("###.##");
+                
+                data = ("Employee: " + ID + "\t");
+                data += ("Hours: " + hours + "\t");
+                data += ("Wage: " + wage + "\t");
+                data += ("Normal Hour Pay: $" + df.format(normHourPay) + "\t");
+                data += ("Overtime Pay: $" + df.format(otPay) + "\t");
+                data += ("Gross Pay: $" + df.format(pay) + "\t");
+                return data;
             }
             
  	// ********** mutators **********
