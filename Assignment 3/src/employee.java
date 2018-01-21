@@ -38,11 +38,11 @@ import java.text.DecimalFormat;
  	// ********** constructors ***********
             
             public employee () {
-                ID = nextID++;
+                ID = this.getID();
             }
             
             public employee (int h, double w) {
-                ID = nextID++;
+                ID = this.getID();
                 wage = w;
                 hours = h;
             }
@@ -50,6 +50,12 @@ import java.text.DecimalFormat;
             
             
  	// ********** accessors **********
+            
+            public int getID () {
+                int id = 0;
+                id = nextID; 
+                return id;
+            }
             
             public double pay () {
                 
@@ -73,6 +79,25 @@ import java.text.DecimalFormat;
                 return grossPay;
             }
             
+            public double getOTPay () {
+                double otPay = 0;
+                int otHours = hours - NORMPAYHOURS;
+                
+                otPay = otHours * (wage * OTPAYMODIFIER);
+                
+                return otPay;
+            }
+            
+            public double getNormHourPay () {
+                int normHour = 0;
+                int otHours = hours - NORMPAYHOURS;
+                
+                normHour = hours - otHours;
+                normHourPay = normHour * wage;
+                
+                return normHourPay;
+            }
+            
             public String toString(){
                 String data = "";
                 DecimalFormat df = new DecimalFormat("###.##");
@@ -80,9 +105,10 @@ import java.text.DecimalFormat;
                 data = ("Employee: " + ID + "\t");
                 data += ("Hours: " + hours + "\t");
                 data += ("Wage: " + wage + "\t");
-                data += ("Normal Hour Pay: $" + df.format(normHourPay) + "\t");
-                data += ("Overtime Pay: $" + df.format(otPay) + "\t");
-                data += ("Gross Pay: $" + df.format(pay) + "\t");
+                data += ("Normal Hour Pay: $" + df.format(this.getNormHourPay()) + "\t");
+                data += ("Overtime Pay: $" + df.format(this.getOTPay()) + "\t");
+                data += ("Gross Pay: $" + df.format(this.pay()) + "\t");
+                
                 return data;
             }
             

@@ -2,7 +2,7 @@
  * Programmer:	C. Seeley
  * Class:  CS30S
  *
- * Assignment: Assignment 3
+ * Assignment: Assignment 3 Employee Payroll
  * Program Name:  employeeClient
  *
  * Description: 
@@ -17,6 +17,7 @@
  import javax.swing.*;
  import java.text.DecimalFormat;
  import java.io.*; 					// import file io libraries
+import java.util.ArrayList;
  
 
 public class employeeClient {  // begin class
@@ -35,7 +36,9 @@ public class employeeClient {  // begin class
         double wage = 0;
         int hours = 0;
         double pay = 0;
+        
         String output = "";
+        ArrayList<employee> employees = new ArrayList<employee>();
         
     	
     // create instances of objects for i/o and formatting
@@ -47,7 +50,6 @@ public class employeeClient {  // begin class
     	PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("textOutA2.txt")));
         
         ProgramInfo programInfo = new ProgramInfo("A3: Employee Payroll");
-        
     	
     // ********** Print output Banner **********
     
@@ -57,7 +59,7 @@ public class employeeClient {  // begin class
  	    	
     // ************************ get input **********************
         
-    
+        int n = 0;
     
         strin = fin.readLine();
         
@@ -66,22 +68,20 @@ public class employeeClient {  // begin class
             
             hours = Integer.parseInt(input[0]);
             wage = Double.parseDouble(input[1]);
-            
-            employee Employee = new employee(hours, wage);
-            
-            pay = Employee.pay();
-            
-            output = Employee.toString();
-            System.out.format(output + "\n");
+                        
+            employees.add(new employee(hours, wage));
             
             strin = fin.readLine();
         }
-        
-        
-    	
-
+            
     // ************************ processing ***************************
     
+        System.out.println("There are " + employees.size() + " employees");
+        
+        for(employee i: employees)
+            System.out.println(i);
+        
+        
     // ************************ print output ****************************
 
     
