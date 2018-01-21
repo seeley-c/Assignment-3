@@ -31,15 +31,10 @@ public class employeeClient {  // begin class
     // ********** declaration of variables **********
     	
     	String delim = "[ ]+";		// delimiter string for splitting input string
-        String strin = "";
-        String input[] = null;
-        double wage = 0;
-        int hours = 0;
-        double pay = 0;
-        
-        String output = "";
-        ArrayList<employee> employees = new ArrayList<employee>();
-        
+        String strin = "";      //input variable
+        String input[] = null;  //array for splitting input
+        double wage = 0;        //variable for wage
+        int hours = 0;          //variable for hours
     	
     // create instances of objects for i/o and formatting
     
@@ -50,40 +45,48 @@ public class employeeClient {  // begin class
     	PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("textOutA2.txt")));
         
         ProgramInfo programInfo = new ProgramInfo("A3: Employee Payroll");
+        DecimalFormat df = new DecimalFormat("###.##"); //output formatting
+        ArrayList<employee> employees = new ArrayList<employee>();
     	
     // ********** Print output Banner **********
     
-    	System.out.println(programInfo.toString());
+    	System.out.println(programInfo.toString()); //output program info
         //fout.println(programInfo.toString());
         
  	    	
     // ************************ get input **********************
-        
-        int n = 0;
     
-        strin = fin.readLine();
+        strin = fin.readLine(); //read in first line from data file
         
-        while (strin != null) {
-            input = strin.split(delim);
+        while (strin != null) { 
+        //while loop for reading in data and creating new employees
+            input = strin.split(delim); //split input
             
-            hours = Integer.parseInt(input[0]);
-            wage = Double.parseDouble(input[1]);
+            hours = Integer.parseInt(input[0]); //parse input for hours
+            wage = Double.parseDouble(input[1]); //parse input for wage
                         
-            employees.add(new employee(hours, wage));
+            employees.add(new employee(hours, wage)); //add employee to array list
             
-            strin = fin.readLine();
-        }
+            strin = fin.readLine(); //read in next line
+        }//end while
             
     // ************************ processing ***************************
     
-        System.out.println("There are " + employees.size() + " employees");
-        
-        for(employee i: employees)
-            System.out.println(i);
-        
         
     // ************************ print output ****************************
-
+    
+        System.out.println("There are " + employees.size() + " employees"); 
+            //outputs the number of employees 
+        
+        for(employee i: employees) //output data for each employee
+            System.out.println(i);
+        
+        System.out.println("\nEmployee 1's ID is: " + employees.get(0).getID());
+        System.out.println("Employee 2's normal pay is: $" + df.format(employees.get(1).getNormHourPay()));
+        System.out.println("Employee 3's overtime pay is: $" + df.format(employees.get(2).getOTPay()));
+        System.out.println("Employee 4's gross pay is: $" + df.format(employees.get(3).pay()));
+        System.out.println("Employee 5's hours are: " + employees.get(4).getHours() + "\n");
+            //output different data for each employee
     
         // ******** closing message *********
         
